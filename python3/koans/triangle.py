@@ -18,8 +18,25 @@
 #
 def triangle(a, b, c):
     # DELETE 'PASS' AND WRITE THIS CODE
-    pass
-
+    sides = [a,b,c]
+    second_side = [b,c,a]
+    third_side = [c,a,b]
+    for x in range(0,3):
+        if sides[x] <= 0:
+            raise TriangleError("Side must be non-zero or positive")
+        
+        if sides[x] + second_side[x] <= third_side[x]:
+            raise TriangleError("Sides "+str(a)+","+str(b)+","+str(c)+" cannot construct a triangle")
+    
+    distinct_sides = len(set(sides))
+    
+    if distinct_sides == 1:
+        return "equilateral"
+    elif distinct_sides == 2:
+        return "isosceles"
+    else:
+        return "scalene"
+        
 # Error class used in part 2.  No need to change this code.
 class TriangleError(Exception):
     pass
